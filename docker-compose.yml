@@ -1,0 +1,10 @@
+version: '2'
+services:
+  app:
+    image: openjdk:11
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: ./mvnw spring-boot:run

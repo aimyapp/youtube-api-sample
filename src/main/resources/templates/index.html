@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>CSV Download of Youtube Search Results</title>
+</head>
+<body>
+
+<h1>CSV Download of Youtube Search Results</h1>
+    <form action="#" th:action="@{/csvDownload}" th:object="${searchForm}" method="post">
+		<p>keyword: <input type="text" th:field="*{keyword}" /></p>
+        <p><input type="submit" value="CSVダウンロード" /></p>
+    </form>
+
+</body>
+</html>
