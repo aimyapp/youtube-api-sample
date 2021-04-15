@@ -43,9 +43,10 @@ public class CsvDownloadController {
 			throws URISyntaxException, JsonProcessingException {
 
 		// Youtubeの検索結果を取得
-		val SearchResult = youtubeDataSearch.getYoutubeSearchData(searchForm.getKeyword());
+		val searchResult = youtubeDataSearch.getYoutubeSearchData(searchForm.getKeyword());
 		// Youtubeの検索結果を整形してCSVファイルを作成
-		val csv = createSearchResultCsvService.createCsv(SearchResult);
+
+		val csv = createSearchResultCsvService.createCsv(searchResult);
 
 		CsvMapper mapper = new CsvMapper();
 		CsvSchema schema = mapper.schemaFor(SearchResultCsv.class).withHeader();
