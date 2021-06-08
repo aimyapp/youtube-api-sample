@@ -34,9 +34,9 @@ public class YoutubeDataSearchSearvice {
 
 		val headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
-		HttpEntity<?> entity = new HttpEntity<>(headers);
+		val entity = new HttpEntity<>(headers);
 
-		UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(youtubeApiProperties.getUrl())
+		val builder = UriComponentsBuilder.fromHttpUrl(youtubeApiProperties.getUrl())
 				.queryParam("type", youtubeApiProperties.getType())
 				.queryParam("part", youtubeApiProperties.getPart())
 				.queryParam("q", keword)
