@@ -1,30 +1,87 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CSV Download of Youtube Search Results</title>
-<!-- BootstrapのCSS読み込み -->
-<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-<!-- jQuery読み込み -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<!-- BootstrapのJS読み込み -->
-<script th:src="@{/js/bootstrap.min.js}"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Youtube CSV Download</title>
+
+    <!--Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!--Font Awesome5-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 </head>
 <body>
+<!-- Navigation -->
+<nav class="navbar navbar-light navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Youtube CSV Download</a>
+</nav>
 
-	<h1>CSV Download of Youtube Search Results</h1>
-	<form action="#" th:action="@{/csvDownload}" th:object="${searchForm}"
-		method="post">
-		<p>
-			keyword: <input type="text" th:field="*{keyword}" />
-		</p>
-		<p>
-			<input type="submit" value="CSVダウンロード" />
-		</p>
-	</form>
+<!-- Page Content -->
+<div class="container mt-5 p-lg-5 bg-light">
 
+    <form action="#" th:action="@{/csvDownload}" th:object="${searchForm}" method="post">
+        <!--氏名-->
+        <div class="form-row mb-4">
+            <div class="col-md-6">
+                <label for="lastName">キーワード</label>
+                <input type="text" class="form-control" id="lastName" placeholder="名字" required>
+                <div class="invalid-feedback">
+                    入力してください
+                </div>
+            </div>
+        </div>
+        <div class="form-row mb-4">
+            <div class="col-md-6 mb-3">
+                <label for="firstName">xxxx</label>
+                <input type="text" th:field="*{keyword}" class="form-control" id="firstName" placeholder="名前" required>
+                <div class="invalid-feedback">
+                    入力してください
+                </div>
+            </div>
+        </div>
+        <!--ボタンブロック-->
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-primary btn-block">ダウンロード</button>
+            </div>
+        </div>
+        <!--/ボタンブロック-->
+
+    </form>
+
+</div><!-- /container -->
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
+<!-- 郵便番号から住所自動入力 -->
+<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+<!-- Validation -->
+<script>
+
+    // 無効なフィールドがある場合にフォーム送信を無効にするスターターJavaScriptの例
+    (function() {
+        'use strict';
+
+        window.addEventListener('load', function() {
+            // カスタムブートストラップ検証スタイルを適用するすべてのフォームを取得
+            var forms = document.getElementsByClassName('needs-validation');
+            // ループして帰順を防ぐ
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                // submitボタンを押したら以下を実行
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 </body>
 </html>
