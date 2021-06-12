@@ -20,7 +20,6 @@ public class YoutubeDataSearchSearvice {
 
 	@Autowired
 	RestTemplate restTemplate;
-
 	@Autowired
 	YoutubeApiProperties youtubeApiProperties;
 

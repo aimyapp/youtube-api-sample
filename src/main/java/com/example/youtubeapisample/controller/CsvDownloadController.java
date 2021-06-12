@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.youtubeapisample.DateUtil;
 import com.example.youtubeapisample.DownloadHelper;
 import com.example.youtubeapisample.csv.SearchResultCsv;
 import com.example.youtubeapisample.form.SearchForm;
@@ -33,6 +34,8 @@ public class CsvDownloadController {
 	CreateSearchResultCsvService createSearchResultCsvService;
 	@Autowired
 	DownloadHelper downloadHelper;
+	@Autowired
+	DateUtil dateUtil;
 
 	@GetMapping({ "/", "/index", "/csvDownload" })
 	public ModelAndView index(ModelAndView mav) {
@@ -52,7 +55,8 @@ public class CsvDownloadController {
 
 		val headers = new HttpHeaders();
 		// 第二引数にダウンロード時のファイル名を設定
-		downloadHelper.addContentDisposition(headers, "日本語ファイル名.csv");
+		downloadHelper.addContentDisposition(headers,
+				searchForm.getKeyword() + "_" + dateUtil.getDateFormat() + ".csv");
 
 		val mapper = new CsvMapper();
 		val schema = mapper.schemaFor(SearchResultCsv.class).withHeader();
