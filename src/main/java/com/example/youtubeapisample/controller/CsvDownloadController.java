@@ -51,7 +51,8 @@ public class CsvDownloadController {
 		// Youtubeの検索結果を取得
 		val searchResult = youtubeDataSearch.getYoutubeSearchData(searchForm.getKeyword());
 		// Youtubeの検索結果を整形してCSVファイルを作成
-		val csvList = createSearchResultCsvService.createCsv(searchResult);
+		val csvList = createSearchResultCsvService.createCsv(searchResult, searchForm.getViewsDivideSubscribers(),
+				searchForm.getXDays());
 
 		val headers = new HttpHeaders();
 		// 第二引数にダウンロード時のファイル名を設定

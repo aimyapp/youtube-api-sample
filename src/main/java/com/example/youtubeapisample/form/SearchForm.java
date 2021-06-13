@@ -6,5 +6,7 @@ import lombok.Data;
 public class SearchForm {
 
 	private String keyword;
+	private int viewsDivideSubscribers;
+	private int xDays;
 
 }

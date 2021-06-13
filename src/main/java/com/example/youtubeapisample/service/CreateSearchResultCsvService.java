@@ -30,34 +30,28 @@ public class CreateSearchResultCsvService {
 	@Autowired
 	YoutubeDataSearchSearvice youtubeDataSearch;
 
-	public List<SearchResultCsv> createCsv(String searchResult)
+	public List<SearchResultCsv> createCsv(String searchResult, int viewsDivideSubscribers, int xDays)
 			throws JsonMappingException, JsonProcessingException, ParseException, URISyntaxException {
 
 		// Youtubeの検索結果をJavaオブジェクトに変換
 		val mapper = new ObjectMapper();
-		val model = mapper.readValue(searchResult, SearchResult.class);
-
-		List<Video> videos = new ArrayList<>();
-		for(Item item : model.getItems()) {
-			val video = youtubeDataSearch.getYoutubeVideoData(item.getId().getVideoId());
-			val a = mapper.readValue(video,Video.class);
-			videos.add(a);
-		}
-
-		youtubeDataSearch.getYoutubeVideoData(model.getItems().get(0).getId().getVideoId());
+		val searchResultModel = mapper.readValue(searchResult, SearchResult.class);
 
 		// CSVに出力するモデル作成
 		List<SearchResultCsv> csvList = new ArrayList<SearchResultCsv>();
-		for (Item item : model.getItems()) {
+		for (Item item : searchResultModel.getItems()) {
+			// Youtubeの検索結果を元に動画情報を取得
+			val video = youtubeDataSearch.getYoutubeVideoData(item.getId().getVideoId());
+			val videoModel = mapper.readValue(video, Video.class);
+			// CSVに出力する値を設定
 			csvList.add(new SearchResultCsv(
-					item.getSnippet().getChannelTitle(), //
-					item.getSnippet().getTitle(), //
-					youtubeApiProperties.getMovieBaseUrl() + item.getId().getVideoId(), //
-					0, //
-					0, //
-					dateUtil.getPublishedAtFormat(item.getSnippet().getPublishedAt())));
+					item.getSnippet().getChannelTitle(), // チャンネル名
+					item.getSnippet().getTitle(), // タイトル
+					youtubeApiProperties.getMovieBaseUrl() + item.getId().getVideoId(), // 動画URL
+					0, // チャンネル登録者数
+					videoModel.getItems().get(0).getStatistics().getViewCount(), // 再生回数
+					dateUtil.getPublishedAtFormat(item.getSnippet().getPublishedAt()))); // 登録日付
 		}
-
 		return csvList;
 	}
 
