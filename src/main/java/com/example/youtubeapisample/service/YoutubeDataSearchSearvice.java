@@ -49,4 +49,30 @@ public class YoutubeDataSearchSearvice {
 		return responseEntity.getBody();
 	}
 
+	/**
+	 * YouTube Data API(Videos: List)
+	 * API リクエストのパラメータに一致する動画のリストを取得する
+	 * @throws URISyntaxException
+	 */
+	public String getYoutubeVideoData(String videoId)
+			throws URISyntaxException {
+
+		val headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		val entity = new HttpEntity<>(headers);
+
+		val builder = UriComponentsBuilder.fromHttpUrl(youtubeApiProperties.getVideoUrl())
+				.queryParam("part", youtubeApiProperties.getStatistics())
+				.queryParam("id", videoId)
+				.queryParam("fields", youtubeApiProperties.getFields())
+				.queryParam("key", youtubeApiProperties.getApiKey());
+
+		HttpEntity<String> responseEntity = restTemplate.exchange(
+				builder.toUriString(),
+				HttpMethod.GET,
+				entity,
+				String.class);
+		return responseEntity.getBody();
+	}
+
 }

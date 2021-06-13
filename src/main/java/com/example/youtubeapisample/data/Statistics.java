@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @lombok.Data
 @JsonIgnoreProperties(ignoreUnknown=true)
-public class ID {
-    private String kind;
-    private String videoId;
+public class Statistics {
+	private int viewCount;
+	private int likeCount;
+	private int dislikeCount;
+	private int favoriteCount;
+	private int commentCount;
 }

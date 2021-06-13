@@ -1,7 +1,5 @@
 package com.example.youtubeapisample.csv;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
@@ -19,10 +17,10 @@ public class SearchResultCsv {
 	@JsonProperty("再生回数")
 	private int viewCount;
 	@JsonProperty("登録日付")
-	private Date publishedAt;
+	private String publishedAt;
 
 	public SearchResultCsv(String channelTitle, String title, String movieUrl, int ownerSubCount, int viewCount,
-			Date publishedAt) {
+			String publishedAt) {
 
 		this.channelTitle = channelTitle;
 		this.title = title;

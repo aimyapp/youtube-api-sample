@@ -56,7 +56,7 @@ public class CsvDownloadController {
 		val headers = new HttpHeaders();
 		// 第二引数にダウンロード時のファイル名を設定
 		downloadHelper.addContentDisposition(headers,
-				searchForm.getKeyword() + "_" + dateUtil.getDateFormat() + ".csv");
+				searchForm.getKeyword() + "_" + dateUtil.getCsvDateFormat() + ".csv");
 
 		val mapper = new CsvMapper();
 		val schema = mapper.schemaFor(SearchResultCsv.class).withHeader();

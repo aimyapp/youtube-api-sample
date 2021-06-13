@@ -10,8 +10,11 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "youtube.api")
 public class YoutubeApiProperties {
 	private String url;
+	private String videoUrl;
 	private String movieBaseUrl;
 	private String apiKey;
 	private String type;
 	private String part;
+	private String statistics;
+	private String fields;
 }
