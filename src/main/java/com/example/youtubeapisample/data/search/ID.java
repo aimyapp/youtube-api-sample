@@ -1,4 +1,4 @@
-package com.example.youtubeapisample.data;
+package com.example.youtubeapisample.data.search;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

@@ -1,4 +1,4 @@
-package com.example.youtubeapisample.data;
+package com.example.youtubeapisample.data.video;
 
 import java.util.List;
 
@@ -8,5 +8,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Video {
 
-	private List<Statistics> items;
+	private List<Item> items;
+
 }

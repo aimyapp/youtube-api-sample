@@ -11,8 +11,9 @@ import org.springframework.stereotype.Service;
 import com.example.youtubeapisample.DateUtil;
 import com.example.youtubeapisample.YoutubeApiProperties;
 import com.example.youtubeapisample.csv.SearchResultCsv;
-import com.example.youtubeapisample.data.Item;
-import com.example.youtubeapisample.data.SearchResult;
+import com.example.youtubeapisample.data.search.Item;
+import com.example.youtubeapisample.data.search.SearchResult;
+import com.example.youtubeapisample.data.video.Video;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,8 +37,14 @@ public class CreateSearchResultCsvService {
 		val mapper = new ObjectMapper();
 		val model = mapper.readValue(searchResult, SearchResult.class);
 
-		//	List<Video> videos = new ArrayList<Video>();
-		//	String a = youtubeDataSearch.getYoutubeVideoData(model.getItems().get(0).getId().getVideoId());
+		List<Video> videos = new ArrayList<>();
+		for(Item item : model.getItems()) {
+			val video = youtubeDataSearch.getYoutubeVideoData(item.getId().getVideoId());
+			val a = mapper.readValue(video,Video.class);
+			videos.add(a);
+		}
+
+		youtubeDataSearch.getYoutubeVideoData(model.getItems().get(0).getId().getVideoId());
 
 		// CSVに出力するモデル作成
 		List<SearchResultCsv> csvList = new ArrayList<SearchResultCsv>();
