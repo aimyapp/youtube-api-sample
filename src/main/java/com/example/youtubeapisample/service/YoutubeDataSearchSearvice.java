@@ -38,6 +38,7 @@ public class YoutubeDataSearchSearvice {
 		val builder = UriComponentsBuilder.fromHttpUrl(youtubeApiProperties.getUrl())
 				.queryParam("type", youtubeApiProperties.getType())
 				.queryParam("part", youtubeApiProperties.getPart())
+				.queryParam("maxResults", youtubeApiProperties.getMaxResults())
 				.queryParam("q", keword)
 				.queryParam("key", youtubeApiProperties.getApiKey());
 

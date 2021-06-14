@@ -17,4 +17,5 @@ public class YoutubeApiProperties {
 	private String part;
 	private String statistics;
 	private String fields;
+	private int maxResults;
 }
