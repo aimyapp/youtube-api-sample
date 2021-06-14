@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Snippet {
     private String publishedAt;
-    private String channelID;
+    private String channelId;
     private String title;
     private String description;
     private Thumbnails thumbnails;

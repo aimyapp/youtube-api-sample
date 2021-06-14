@@ -13,19 +13,19 @@ public class SearchResultCsv {
 	@JsonProperty("動画URL")
 	private String movieUrl;
 	@JsonProperty("チャンネル登録者数")
-	private int ownerSubCount;
+	private int subscriberCount;
 	@JsonProperty("再生回数")
 	private int viewCount;
 	@JsonProperty("登録日付")
 	private String publishedAt;
 
-	public SearchResultCsv(String channelTitle, String title, String movieUrl, int ownerSubCount, int viewCount,
+	public SearchResultCsv(String channelTitle, String title, String movieUrl, int subscriberCount, int viewCount,
 			String publishedAt) {
 
 		this.channelTitle = channelTitle;
 		this.title = title;
 		this.movieUrl = movieUrl;
-		this.ownerSubCount = ownerSubCount;
+		this.subscriberCount = subscriberCount;
 		this.viewCount = viewCount;
 		this.publishedAt = publishedAt;
 

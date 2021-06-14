@@ -76,4 +76,29 @@ public class YoutubeDataSearchSearvice {
 		return responseEntity.getBody();
 	}
 
+	/**
+	 * YouTube Data API(Channels: List)
+	 * リクエスト条件に一致するゼロ個以上の channel リソースを取得
+	 * @throws URISyntaxException
+	 */
+	public String getYoutubeChannelData(String channelId)
+			throws URISyntaxException {
+
+		val headers = new HttpHeaders();
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		val entity = new HttpEntity<>(headers);
+
+		val builder = UriComponentsBuilder.fromHttpUrl(youtubeApiProperties.getVideoUrl())
+				.queryParam("part", youtubeApiProperties.getStatistics())
+				.queryParam("id", channelId)
+				.queryParam("key", youtubeApiProperties.getApiKey());
+
+		HttpEntity<String> responseEntity = restTemplate.exchange(
+				builder.toUriString(),
+				HttpMethod.GET,
+				entity,
+				String.class);
+		return responseEntity.getBody();
+	}
+
 }
