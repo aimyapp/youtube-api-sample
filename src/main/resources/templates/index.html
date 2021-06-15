@@ -34,8 +34,8 @@
         </div>
         <div class="form-row mb-4">
             <div class="col-md-6 mb-3">
-                <label for="firstName">再生回数/チャンネル登録者数＝○％以上</label>
-                <input type="number"  class="form-control" id="viewsDivideSubscribers" placeholder="80" required>
+                <label for="views">再生回数/チャンネル登録者数＝○％以上</label>
+                <input type="number"  class="form-control" th:field="*{viewsDivideSubscribers}" id="viewsDivideSubscribers" placeholder="80" required>
                 <div class="invalid-feedback">
                     入力してください
                 </div>
@@ -43,8 +43,8 @@
         </div>
         <div class="form-row mb-4">
             <div class="col-md-6 mb-3">
-                <label for="firstName">○日以内に投稿されたもの</label>
-                <input type="number"  class="form-control" id="xDays" placeholder="5" required>
+                <label for="xDays">○日以内に投稿されたもの</label>
+                <input type="number"  class="form-control" th:field="*{xDays}" id="xDays" placeholder="5" required>
                 <div class="invalid-feedback">
                     入力してください
                 </div>

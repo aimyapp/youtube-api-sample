@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @lombok.Data
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Statistics {
-	private int viewCount;
-	private int subscriberCount;
+	private long viewCount;
+	private long subscriberCount;
 	private boolean hiddenSubscriberCount;
-	private int videoCount;
+	private long videoCount;
 }

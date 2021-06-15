@@ -88,7 +88,7 @@ public class YoutubeDataSearchSearvice {
 		headers.setContentType(MediaType.APPLICATION_JSON);
 		val entity = new HttpEntity<>(headers);
 
-		val builder = UriComponentsBuilder.fromHttpUrl(youtubeApiProperties.getVideoUrl())
+		val builder = UriComponentsBuilder.fromHttpUrl(youtubeApiProperties.getChannelUrl())
 				.queryParam("part", youtubeApiProperties.getStatistics())
 				.queryParam("id", channelId)
 				.queryParam("key", youtubeApiProperties.getApiKey());
