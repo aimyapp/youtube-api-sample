@@ -12,6 +12,7 @@ public class YoutubeApiProperties {
 	private String url;
 	private String videoUrl;
 	private String movieBaseUrl;
+	private String channelUrl;
 	private String apiKey;
 	private String type;
 	private String part;
