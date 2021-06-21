@@ -2,6 +2,7 @@ package com.example.youtubeapisample.service;
 
 import java.net.URISyntaxException;
 import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,8 @@ public class CreateSearchResultCsvService {
 		// Youtubeの検索結果をJavaオブジェクトに変換
 		val mapper = new ObjectMapper();
 		val searchResultModel = mapper.readValue(searchResult, SearchResult.class);
+		val endDate = LocalDate.now();
+		val startDate = endDate.minusDays(xDays);
 
 		// CSVに出力するモデル作成
 		List<SearchResultCsv> csvList = new ArrayList<SearchResultCsv>();
@@ -47,15 +50,20 @@ public class CreateSearchResultCsvService {
 			// 動画情報を元にチャンネル情報を取得
 			val channel = youtubeDataSearch.getYoutubeChannelData(item.getSnippet().getChannelId());
 			val channelModel = mapper.readValue(channel, Channel.class);
+			val targetDate = dateUtil
+					.string2LocalDate((dateUtil.getPublishedAtFormat(item.getSnippet().getPublishedAt())));
 
-			// CSVに出力する値を設定
-			csvList.add(new SearchResultCsv(
-					item.getSnippet().getChannelTitle(), // チャンネル名
-					item.getSnippet().getTitle(), // タイトル
-					youtubeApiProperties.getMovieBaseUrl() + item.getId().getVideoId(), // 動画URL
-					channelModel.getItems().get(0).getStatistics().getSubscriberCount(), // チャンネル登録者数
-					videoModel.getItems().get(0).getStatistics().getViewCount(), // 再生回数
-					dateUtil.getPublishedAtFormat(item.getSnippet().getPublishedAt()))); // 登録日付
+			// 〇日以内に投稿された & 再生回数/チャンネル登録者数＝○％以上 の対象のみ
+			if (dateUtil.between(targetDate, startDate, endDate)) {
+				// CSVに出力する値を設定
+				csvList.add(new SearchResultCsv(
+						item.getSnippet().getChannelTitle(), // チャンネル名
+						item.getSnippet().getTitle(), // タイトル
+						youtubeApiProperties.getMovieBaseUrl() + item.getId().getVideoId(), // 動画URL
+						channelModel.getItems().get(0).getStatistics().getSubscriberCount(), // チャンネル登録者数
+						videoModel.getItems().get(0).getStatistics().getViewCount(), // 再生回数
+						dateUtil.getPublishedAtFormat(item.getSnippet().getPublishedAt()))); // 登録日付
+			}
 		}
 		return csvList;
 	}
