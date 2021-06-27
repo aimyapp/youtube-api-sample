@@ -1,97 +1,136 @@
 <!DOCTYPE HTML>
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Youtube CSV Download</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Youtube CSV Download</title>
 
-    <!--Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <!--Font Awesome5-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+<!--Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!--Font Awesome5-->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+<style type="text/css">
+.footer {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	/* Set the fixed height of the footer here */
+	height: 60px;
+	background-color: #343a40;
+}
+
+body>.container {
+	padding: 60px 15px 0;
+}
+
+.container .text-muted {
+	margin: 20px 0;
+}
+
+.footer>.container {
+	padding-right: 15px;
+	padding-left: 15px;
+}
+</style>
 </head>
 <body>
-<!-- Navigation -->
-<nav class="navbar navbar-light navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Youtube CSV Download</a>
-</nav>
+	<!-- Navigation -->
+	<nav class="navbar navbar-light navbar-dark bg-dark">
+		<a class="navbar-brand" href="#">Youtube CSV Download</a>
+	</nav>
 
-<!-- Page Content -->
-<div class="container mt-5 p-lg-5 bg-light">
+	<!-- Page Content -->
+	<div class="container mt-5 p-lg-5 bg-light">
 
-    <form action="#" th:action="@{/csvDownload}" th:object="${searchForm}" method="post">
-       <!--  <h4>使い方</h4> -->
+		<form action="#" th:action="@{/csvDownload}" th:object="${searchForm}"
+			method="post">
+			<!--  <h4>使い方</h4> -->
+			<div class="form-row mb-4">
+				<div class="col-md-6">
+					<label for="lastName">検索キーワード</label> <input type="text"
+						th:field="*{keyword}" class="form-control" id="lastName"
+						placeholder="HIKAK◯N" required>
+					<div class="invalid-feedback">入力してください</div>
+				</div>
+			</div>
+			<div class="form-row mb-4">
+				<div class="col-md-6 mb-3">
+					<label for="views">再生回数/チャンネル登録者数＝○％以上</label> <input type="number"
+						class="form-control" th:field="*{viewsDivideSubscribers}"
+						id="viewsDivideSubscribers" placeholder="80" required>
+					<div class="invalid-feedback">入力してください</div>
+				</div>
+			</div>
+			<div class="form-row mb-4">
+				<div class="col-md-6 mb-3">
+					<label for="xDays">○日以内に投稿されたもの</label> <input type="number"
+						class="form-control" th:field="*{xDays}" id="xDays"
+						placeholder="5" required>
+					<div class="invalid-feedback">入力してください</div>
+				</div>
+			</div>
+			<!--ボタンブロック-->
+			<div class="form-group row">
+				<div class="col-sm-6">
+					<button type="submit" class="btn btn-primary btn-block">ダウンロード</button>
+				</div>
+			</div>
+			<!--/ボタンブロック-->
+		</form>
+	</div>
+	<!-- /container -->
 
-        <div class="form-row mb-4">
-            <div class="col-md-6">
-                <label for="lastName">検索キーワード</label>
-                <input type="text" th:field="*{keyword}" class="form-control" id="lastName" placeholder="HIKAK◯N" required>
-                <div class="invalid-feedback">
-                    入力してください
-                </div>
-            </div>
-        </div>
-        <div class="form-row mb-4">
-            <div class="col-md-6 mb-3">
-                <label for="views">再生回数/チャンネル登録者数＝○％以上</label>
-                <input type="number"  class="form-control" th:field="*{viewsDivideSubscribers}" id="viewsDivideSubscribers" placeholder="80" required>
-                <div class="invalid-feedback">
-                    入力してください
-                </div>
-            </div>
-        </div>
-        <div class="form-row mb-4">
-            <div class="col-md-6 mb-3">
-                <label for="xDays">○日以内に投稿されたもの</label>
-                <input type="number"  class="form-control" th:field="*{xDays}" id="xDays" placeholder="5" required>
-                <div class="invalid-feedback">
-                    入力してください
-                </div>
-            </div>
-        </div>
-        <!--ボタンブロック-->
-        <div class="form-group row">
-            <div class="col-sm-6">
-                <button type="submit" class="btn btn-primary btn-block">ダウンロード</button>
-            </div>
-        </div>
-        <!--/ボタンブロック-->
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<!-- 郵便番号から住所自動入力 -->
+	<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
+	<!-- Validation -->
 
-    </form>
+	<footer class="footer">
+		<div class="container">
+			<p class="text-muted">Copyright (C) 2021 @aimy_app All Rights
+				Reserved.</p>
+		</div>
+	</footer>
 
-</div><!-- /container -->
-
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
-<!-- 郵便番号から住所自動入力 -->
-<script src="https://ajaxzip3.github.io/ajaxzip3.js" charset="UTF-8"></script>
-<!-- Validation -->
-<script>
-
-    // 無効なフィールドがある場合にフォーム送信を無効にするスターターJavaScriptの例
-    (function() {
-        'use strict';
-
-        window.addEventListener('load', function() {
-            // カスタムブートストラップ検証スタイルを適用するすべてのフォームを取得
-            var forms = document.getElementsByClassName('needs-validation');
-            // ループして帰順を防ぐ
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                // submitボタンを押したら以下を実行
-                form.addEventListener('submit', function(event) {
-                    if (form.checkValidity() === false) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
-                }, false);
-            });
-        }, false);
-    })();
-</script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<!-- Validation -->
+	<script>
+		// 無効なフィールドがある場合にフォーム送信を無効にするスターターJavaScriptの例
+		(function() {
+			'use strict';
+			window.addEventListener('load',
+					function() {
+						// カスタムブートストラップ検証スタイルを適用するすべてのフォームを取得
+						var forms = document
+								.getElementsByClassName('needs-validation');
+						// ループして帰順を防ぐ
+						var validation = Array.prototype.filter.call(forms,
+								function(form) {
+									// submitボタンを押したら以下を実行
+									form.addEventListener('submit', function(
+											event) {
+										if (form.checkValidity() === false) {
+											event.preventDefault();
+											event.stopPropagation();
+										}
+										form.classList.add('was-validated');
+									}, false);
+								});
+					}, false);
+		})();
+	</script>
 </body>
 </html>
