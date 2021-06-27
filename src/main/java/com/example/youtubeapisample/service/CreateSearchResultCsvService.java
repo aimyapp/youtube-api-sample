@@ -52,9 +52,12 @@ public class CreateSearchResultCsvService {
 			val channelModel = mapper.readValue(channel, Channel.class);
 			val targetDate = dateUtil
 					.string2LocalDate((dateUtil.getPublishedAtFormat(item.getSnippet().getPublishedAt())));
+			val viewCount = videoModel.getItems().get(0).getStatistics().getViewCount();
+			val subcriberCount = channelModel.getItems().get(0).getStatistics().getSubscriberCount();
 
 			// 〇日以内に投稿された & 再生回数/チャンネル登録者数＝○％以上 の対象のみ
-			if (dateUtil.between(targetDate, startDate, endDate)) {
+			if (dateUtil.between(targetDate, startDate, endDate)
+					&& (viewCount / subcriberCount) * 100 >= viewsDivideSubscribers) {
 				// CSVに出力する値を設定
 				csvList.add(new SearchResultCsv(
 						item.getSnippet().getChannelTitle(), // チャンネル名
